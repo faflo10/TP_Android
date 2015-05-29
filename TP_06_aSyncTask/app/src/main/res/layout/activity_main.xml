@@ -18,14 +18,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="15sp"
-                android:text="Date-heure"/>
+                android:text="Date-heure"
+                android:id="@+id/heure"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="COUCOU"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:id="@+id/text"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,14 +56,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="15sp"
-                android:text="Meteo LoadUrl"/>
+                android:text="Meteo LoadUrl"
+                android:id="@+id/raw"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="15sp"
-                android:text="Meteo LoadData"/>
+                android:text="Meteo LoadData"
+                android:id="@+id/meteo"/>
         </LinearLayout>
     </LinearLayout>
     <WebView
