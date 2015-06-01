@@ -5,13 +5,13 @@ package faflo10.tp_07_parsingxml;
  */
 public class Meteo {
     private String date;
-    private double[] T;
+    private String[] T;
     private String[] C;
 
-    public Meteo(String date, String c_mat, double t_mat, String c_mid, double t_mid,
-                 String c_aft, double t_aft, String c_soi, double t_soi) {
+    public Meteo(String date, String c_mat, String t_mat, String c_mid, String t_mid,
+                 String c_aft, String t_aft, String c_soi, String t_soi) {
         this.date = date;
-        T = new double[4];
+        T = new String[4];
         T[0] = t_mat;
         T[1] = t_mid;
         T[2] = t_aft;
@@ -37,7 +37,7 @@ public class Meteo {
         return date;
     }
 
-    public double[] getT() {
+    public String[] getT() {
         return T;
     }
 
@@ -45,7 +45,7 @@ public class Meteo {
         return C;
     }
 
-    public void setT(double[] t) {
+    public void setT(String[] t) {
         if(t.length == T.length) {
             T = t;
         } else {

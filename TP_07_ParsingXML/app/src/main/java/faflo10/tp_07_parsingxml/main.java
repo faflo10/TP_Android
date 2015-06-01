@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -30,6 +32,7 @@ public class main extends Activity {
     private ListView list;
     private TextView date;
     private TextView condition;
+    private Button go;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +48,22 @@ public class main extends Activity {
         list = (ListView)findViewById(R.id.list);
         date = (TextView) findViewById(R.id.date);
         condition = (TextView) findViewById(R.id.prevision);
+        go = (Button)findViewById(R.id.go);
         final Context context = this;
 
-        try {
-            task = new Task();
-            URL rssUrl = new URL("http://api.meteorologic.net/forecarss?p=Bourg-en-Bresse");
-            task.execute(rssUrl,list,date,condition,context);
+        go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Toast.makeText(getApplicationContext(),"Coucou",Toast.LENGTH_SHORT).show();
+                    task = new Task();
+                    URL rssUrl = new URL("http://api.meteorologic.net/forecarss?p=Bourg-en-Bresse");
+                    task.execute(rssUrl,list,date,condition,context);
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

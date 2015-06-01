@@ -33,6 +33,7 @@ public class Task extends AsyncTask<Object,Void,ArrayList<Meteo>> {
         date = (TextView)params[2];
         condition = (TextView)params[3];
         this.context = (Context)params[4];
+        prev = new ArrayList<>();
 
         try {
             HttpURLConnection connect = (HttpURLConnection) urlRss.openConnection();
@@ -40,23 +41,33 @@ public class Task extends AsyncTask<Object,Void,ArrayList<Meteo>> {
             factory.setNamespaceAware(true);
             XmlPullParser parse = factory.newPullParser();
             parse.setInput(connect.getInputStream(),"UTF-8");
-            while(parse.getEventType() != XmlPullParser.END_DOCUMENT) {
-                if(parse.getEventType() == XmlPullParser.START_TAG) {
-                    if(parse.getPrefix().equals("meteo")) {
+            System.out.println(parse);
+            int event = parse.getEventType();
+            while(event != XmlPullParser.END_DOCUMENT) {
+                if(event == XmlPullParser.START_TAG) {
+                    if(parse.getPrefix() != null && parse.getPrefix().equals("meteo")) {
                         if(parse.getName().equals("weather")) {
                             Meteo jour = new Meteo(parse.getAttributeValue(null,"date"),
                                     parse.getAttributeValue(null,"namepictos_matin"),
-                                    Double.parseDouble(parse.getAttributeValue(null, "tempe_matin")),
+                                    parse.getAttributeValue(null, "tempe_matin"),
                                     parse.getAttributeValue(null,"namepictos_midi"),
-                                    Double.parseDouble(parse.getAttributeValue(null,"tempe_midi")),
+                                    parse.getAttributeValue(null,"tempe_midi"),
                                     parse.getAttributeValue(null,"namepictos_apmidi"),
-                                    Double.parseDouble(parse.getAttributeValue(null,"tempe_apmidi")),
+                                    parse.getAttributeValue(null,"tempe_apmidi"),
                                     parse.getAttributeValue(null,"namepictos_soir"),
-                                    Double.parseDouble(parse.getAttributeValue(null,"tempe_soir")));
+                                    parse.getAttributeValue(null,"tempe_soir"));
+                            System.out.println(parse.getAttributeValue(null,"date"));
                             prev.add(jour);
+                        } else {
+                            System.out.println("test");
                         }
+                    } else {
+                        System.out.println("test1");
                     }
+                } else {
+                    System.out.println("test2");
                 }
+                event = parse.next();
             }
             return prev;
         } catch(MalformedURLException e) {
@@ -75,6 +86,7 @@ public class Task extends AsyncTask<Object,Void,ArrayList<Meteo>> {
             list.setAdapter(adapt);
         } else {
             System.out.println("probleme");
+            System.out.println(prev.toString());
         }
     }
 }
