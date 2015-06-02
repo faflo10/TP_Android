@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Projet_meteo</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    
+    <string-array name="content">
+        <item>Item1</item>
+        <item>Item2</item>
+        <item>Item3</item>
+        <item>Item4</item>
+    </string-array>
+</resources>
