@@ -5,9 +5,10 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     
     <string-array name="content">
-        <item>Item1</item>
-        <item>Item2</item>
-        <item>Item3</item>
-        <item>Item4</item>
+        <item>Lyon</item>
+        <item>Paris</item>
+        <item>Marseille</item>
+        <item>Toulouse</item>
+        <item>Nice</item>
     </string-array>
 </resources>
