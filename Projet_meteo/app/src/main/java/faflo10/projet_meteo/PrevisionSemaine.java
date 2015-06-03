@@ -2,16 +2,22 @@ package faflo10.projet_meteo;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+
+import static android.support.v4.app.ActivityCompat.startActivity;
 
 /**
  * Created by faflo10 on 03/06/2015.
  */
-public class PrevisionSemaine extends Activity {
+public class PrevisionSemaine extends Activity{
     private ListView list;
     private TextView date;
     private TextView condition;
@@ -21,6 +27,7 @@ public class PrevisionSemaine extends Activity {
     private String url_str;
     private URL url;
     private Task task;
+    private ArrayList<Meteo> prev;
 
     protected void onStart() {
         super.onStart();
@@ -31,6 +38,7 @@ public class PrevisionSemaine extends Activity {
         try {
             url = new URL(url_str);
             task.execute(url,list,date,condition,context);
+            initListListener();
         } catch(MalformedURLException e) {
             e.getMessage();
         }
@@ -45,7 +53,24 @@ public class PrevisionSemaine extends Activity {
         url_str = getIntent().getStringExtra("url");
         ville.setText(url_str);
         url_str = "http://api.meteorologic.net/forecarss?p="+url_str;
-        task = new Task();
+        task = new Task(new OnTaskComplete() {
+            @Override
+            public void onTaskComplete(Object o) {
+                prev = (ArrayList<Meteo>) o;
+            }
+        });
+    }
 
+    public void initListListener() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent zoom = new Intent(context,ZoomJour.class);
+                zoom.putExtra("day",prev.get(position).getDate());
+                zoom.putExtra("t",prev.get(position).getT());
+                zoom.putExtra("c",prev.get(position).getC());
+                startActivity(zoom);
+            }
+        });
     }
 }

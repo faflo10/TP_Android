@@ -1,7 +1,10 @@
 package faflo10.projet_meteo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,16 +18,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static android.support.v4.app.ActivityCompat.startActivity;
+
 /**
  * Created by faflo10 on 03/06/2015.
  */
 public class Task extends AsyncTask<Object,Void,ArrayList<Meteo>> {
+    private OnTaskComplete listener;
     private ListView list;
     private TextView date;
     private TextView condition;
     private ArrayList<Meteo> prev;
     private Context context;
     private ListElementAdapter adapt;
+
+    public Task(OnTaskComplete listener) {
+        this.listener = listener;
+    }
 
     @Override
     protected ArrayList<Meteo> doInBackground(Object... params) {
@@ -73,11 +83,11 @@ public class Task extends AsyncTask<Object,Void,ArrayList<Meteo>> {
         return null;
     }
 
-    protected void onPostExecute(ArrayList<Meteo> prev) {
+    protected void onPostExecute(final ArrayList<Meteo> prev) {
         if(prev.size() != 0 && prev != null) {
             adapt = new ListElementAdapter(prev,context);
             list.setAdapter(adapt);
-
+            listener.onTaskComplete(prev);
         } else {
             System.out.println("probleme");
             System.out.println(prev.toString());

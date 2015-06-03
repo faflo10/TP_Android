@@ -31,8 +31,8 @@ public class ListElementAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return position;
+    public Meteo getItem(int position) {
+        return met.get(position);
     }
 
     @Override
@@ -67,4 +67,6 @@ public class ListElementAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+
 }
