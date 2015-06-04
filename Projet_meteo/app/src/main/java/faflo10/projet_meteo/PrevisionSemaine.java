@@ -68,7 +68,7 @@ public class PrevisionSemaine extends Activity{
                 Intent zoom = new Intent(context,ZoomJour.class);
                 zoom.putExtra("day",prev.get(position).getDate());
                 zoom.putExtra("t",prev.get(position).getT());
-                zoom.putExtra("c",prev.get(position).getC());
+                zoom.putExtra("xml",prev.get(position).getXML());
                 startActivity(zoom);
             }
         });

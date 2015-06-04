@@ -65,7 +65,11 @@ public class Task extends AsyncTask<Object,Void,ArrayList<Meteo>> {
                                     new String[] {parse.getAttributeValue(null,"namepictos_matin"),
                                             parse.getAttributeValue(null,"namepictos_midi"),
                                             parse.getAttributeValue(null,"namepictos_apmidi"),
-                                            parse.getAttributeValue(null,"namepictos_soir")});
+                                            parse.getAttributeValue(null,"namepictos_soir")},
+                                    new String[] {parse.getAttributeValue(null,"pictos_matin"),
+                                            parse.getAttributeValue(null,"pictos_midi"),
+                                            parse.getAttributeValue(null,"pictos_apmidi"),
+                                            parse.getAttributeValue(null,"pictos_soir")});
                             prev.add(jour);
                         }
                     }
