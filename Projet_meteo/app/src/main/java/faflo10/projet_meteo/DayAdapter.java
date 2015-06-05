@@ -81,9 +81,16 @@ public class DayAdapter extends BaseAdapter {
         TextView temp = (TextView)convertView.findViewById(R.id.temp);
 
         moment.setText(momentT[position]);
-        System.out.println(C[position]);
-        image.setImageResource(hm.get(C[position]));
-        temp.setText("T : "+T[position] + "°C");
+
+        if(C[position] != null) {
+            image.setImageResource(hm.get(C[position]));
+        }
+        
+        if(T[position] != null) {
+            temp.setText("T : " + T[position] + "°C");
+        } else {
+            temp.setText("Pas de données");
+        }
 
         return convertView;
     }
